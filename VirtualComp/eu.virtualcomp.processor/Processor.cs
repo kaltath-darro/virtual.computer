@@ -5,6 +5,8 @@ namespace VirtualComp.eu.virtualcomp.processor
 {
     public class Processor
     {
+        private const bool b0 = false;
+        private const bool b1 = true;
         private IMemoryBus memoryBus;
         private Register R1;
         private Register R2;
@@ -12,13 +14,17 @@ namespace VirtualComp.eu.virtualcomp.processor
         private byte SP; // stack pointer
         private byte PC; //program couter
         private bool CF; //carry - nie pamiętam po co ona była
+        private readonly AdditionModule additionModule;
 
         public Processor(IMemoryBus memoryBus)
         {
             this.memoryBus = memoryBus;
+            this.additionModule = new AdditionModule();
+            AddressingMemory();
             R1 = new Register(false, false, false, false, false, false, false, false);
             R2 = new Register(false, false, false, false, false, false, false, false);
             A = new Register(false, false, false, false, false, false, false, false);
+
         }
 
         public void Process()
@@ -30,6 +36,18 @@ namespace VirtualComp.eu.virtualcomp.processor
                 //obsługa opkodów
                 //Convert.ToBoolean()
 
+            }
+        }
+
+        private void AddressingMemory()
+        {
+            MemoryUnit address = MemoryUnit.Init();
+            MemoryUnit one = new MemoryUnit(b0, b0, b0, b0, b0, b0, b0, b1);
+
+            while (!address.IsMax())
+            {
+                address = additionModule.Add(address, one);
+                memoryBus.InitCell(address);
             }
         }
     }

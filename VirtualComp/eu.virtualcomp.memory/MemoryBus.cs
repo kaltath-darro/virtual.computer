@@ -14,6 +14,11 @@
             return ram.Get(address);
         }
 
+        public void InitCell(MemoryUnit address)
+        {
+            ram.Init(address);
+        }
+
         public void Set(byte address, MemoryUnit memoryUnit)
         {
             ram.Set(address, memoryUnit);

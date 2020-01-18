@@ -10,5 +10,6 @@ namespace VirtualComp.eu.virtualcomp.memory
     {
         MemoryUnit Get(byte address);
         void Set(byte address, MemoryUnit memoryUnit);
+        void InitCell(MemoryUnit address);
     }
 }

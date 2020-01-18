@@ -1,9 +1,13 @@
-﻿namespace VirtualComp.eu.virtualcomp.memory
+﻿using System.Collections.Generic;
+
+namespace VirtualComp.eu.virtualcomp.memory
 {
     public class RAM //255 b
     {
         private MemoryUnit [] ram;
         private IMemoryBus memoryBus;
+
+        private readonly IDictionary<MemoryUnit, MemoryUnit> memoryCells = new Dictionary<MemoryUnit, MemoryUnit>();
 
         public RAM()
         {
@@ -20,6 +24,11 @@
         public MemoryUnit Get(byte address)
         {
             return ram[address];
+        }
+
+        public void Init(MemoryUnit address)
+        {
+            memoryCells.Add(address, MemoryUnit.Init());
         }
 
     }

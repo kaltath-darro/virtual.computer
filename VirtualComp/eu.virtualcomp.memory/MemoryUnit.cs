@@ -63,6 +63,16 @@
             return h;
         }
 
+        public static MemoryUnit Init()
+        {
+            return new MemoryUnit(false, false, false, false, false, false, false, false);
+        }
+
+        public bool IsMax()
+        {
+            return a && b && c && d && e && f && g && h;
+        }
+
         public static MemoryUnit Parse(string value)
         {
             //nie może być null i musi być 8

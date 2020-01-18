@@ -49,8 +49,10 @@
     <Compile Include="eu.virtualcomp.memory\RAM.cs" />
     <Compile Include="eu.virtualcomp.memory\ROM.cs" />
     <Compile Include="eu.virtualcomp.motherboard\Motherboard.cs" />
+    <Compile Include="eu.virtualcomp.processor\AdditionModule.cs" />
     <Compile Include="eu.virtualcomp.processor\Register.cs" />
     <Compile Include="eu.virtualcomp.processor\Processor.cs" />
+    <Compile Include="eu.virtualcomp.processor\SumBitResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
