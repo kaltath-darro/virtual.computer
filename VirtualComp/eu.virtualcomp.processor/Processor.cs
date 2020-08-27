@@ -1,5 +1,4 @@
-﻿using System;
-using VirtualComp.eu.virtualcomp.memory;
+﻿using VirtualComp.eu.virtualcomp.memory;
 
 namespace VirtualComp.eu.virtualcomp.processor
 {
@@ -7,24 +6,26 @@ namespace VirtualComp.eu.virtualcomp.processor
     {
         private const bool b0 = false;
         private const bool b1 = true;
-        private IMemoryBus memoryBus;
+        private IMemoryBus<MemoryUnit, WordUnit> memoryBus;
         private Register R1;
         private Register R2;
         private Register A;
         private byte SP; // stack pointer
-        private byte PC; //program couter
+        private MemoryUnit PC;
         private bool CF; //carry - nie pamiętam po co ona była
+        private IInstruction instruction;
         private readonly AdditionModule additionModule;
+        private readonly MemoryUnit one = new MemoryUnit(b0, b0, b0, b0, b0, b0, b0, b1);
 
-        public Processor(IMemoryBus memoryBus)
+        public Processor(IMemoryBus<MemoryUnit, WordUnit> memoryBus)
         {
             this.memoryBus = memoryBus;
             this.additionModule = new AdditionModule();
             AddressingMemory();
+            PC = MemoryUnit.Init();
+            A = new Register(false, false, false, false, false, false, false, false);
             R1 = new Register(false, false, false, false, false, false, false, false);
             R2 = new Register(false, false, false, false, false, false, false, false);
-            A = new Register(false, false, false, false, false, false, false, false);
-
         }
 
         public void Process()
@@ -32,17 +33,24 @@ namespace VirtualComp.eu.virtualcomp.processor
             bool isPower = true;
             while (isPower)
             {
-                MemoryUnit memoryUnit =  memoryBus.Get(PC);
+                WordUnit line = memoryBus.Get(PC);
+                //instruction = new MovInstruction();
+                
+                instruction.Invoke(line.Byte2, line.Byte3);
+
                 //obsługa opkodów
                 //Convert.ToBoolean()
 
+                PC = additionModule.Add(PC, one);
+
+                if (PC.IsMax())
+                    isPower = false;
             }
         }
 
         private void AddressingMemory()
         {
             MemoryUnit address = MemoryUnit.Init();
-            MemoryUnit one = new MemoryUnit(b0, b0, b0, b0, b0, b0, b0, b1);
 
             while (!address.IsMax())
             {
@@ -52,3 +60,4 @@ namespace VirtualComp.eu.virtualcomp.processor
         }
     }
 }
+//private byte PC; //program couter

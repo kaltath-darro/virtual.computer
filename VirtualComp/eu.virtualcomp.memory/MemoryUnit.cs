@@ -84,5 +84,46 @@
 
             return new MemoryUnit(b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7]);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            MemoryUnit memoryUnit = obj as MemoryUnit;
+
+            if (memoryUnit == null)
+                return false;
+
+            if (getA() == memoryUnit.getA() &&
+                getB() == memoryUnit.getB() &&
+                getC() == memoryUnit.getC() &&
+                getD() == memoryUnit.getD() &&
+                getE() == memoryUnit.getE() &&
+                getF() == memoryUnit.getF() &&
+                getG() == memoryUnit.getG() &&
+                getH() == memoryUnit.getH())
+                return true;
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 13;
+                hash = (hash * 7) + getA().GetHashCode();
+                hash = (hash * 7) + getB().GetHashCode();
+                hash = (hash * 7) + getC().GetHashCode();
+                hash = (hash * 7) + getD().GetHashCode();
+                hash = (hash * 7) + getE().GetHashCode();
+                hash = (hash * 7) + getF().GetHashCode();
+                hash = (hash * 7) + getG().GetHashCode();
+                hash = (hash * 7) + getH().GetHashCode();
+
+                return hash;
+            }
+        }
     }
 }

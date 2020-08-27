@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VirtualComp.eu.virtualcomp.memory
+﻿namespace VirtualComp.eu.virtualcomp.memory
 {
-    public interface IMemoryBus
+    public interface IMemoryBus<TAddress, TValue>
     {
-        MemoryUnit Get(byte address);
-        void Set(byte address, MemoryUnit memoryUnit);
-        void InitCell(MemoryUnit address);
+        TValue Get(TAddress address);
+        void Set(TAddress address, TValue memoryUnit);
+        void InitCell(TAddress address);
     }
 }

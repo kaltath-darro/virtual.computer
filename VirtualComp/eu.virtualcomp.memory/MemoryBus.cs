@@ -1,6 +1,6 @@
 ﻿namespace VirtualComp.eu.virtualcomp.memory
 {
-    public class MemoryBus : IMemoryBus
+    public class MemoryBus : IMemoryBus<MemoryUnit, WordUnit>
     {
         private RAM ram;
 
@@ -9,7 +9,7 @@
             this.ram = ram;
         }
 
-        public MemoryUnit Get(byte address)
+        public WordUnit Get(MemoryUnit address)
         {
             return ram.Get(address);
         }
@@ -19,7 +19,7 @@
             ram.Init(address);
         }
 
-        public void Set(byte address, MemoryUnit memoryUnit)
+        public void Set(MemoryUnit address, WordUnit memoryUnit)
         {
             ram.Set(address, memoryUnit);
         }

@@ -6,7 +6,7 @@ namespace VirtualComp.eu.virtualcomp.motherboard
     public class Motherboard
     {
         private RAM ram;
-        private IMemoryBus memoryBus;
+        private IMemoryBus<MemoryUnit, WordUnit> memoryBus;
         private Processor processor;
 
         public Motherboard()
